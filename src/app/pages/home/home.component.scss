@@ -1,0 +1,21 @@
+.bg-fondo {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container-table-options {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.button-option {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}

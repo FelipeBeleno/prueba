@@ -1,0 +1,54 @@
+.container-login{
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-card{
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, inset 1px 10px 24px 10px rgba(89,126,121,0.1);
+  box-shadow: 0px 10px 13px -7px #000000, inset 1px 10px 24px 10px rgba(89,126,121,0.1);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 5vw;
+  width: 60vw;
+}
+
+
+.card-button{
+  display: flex;
+  justify-content: center;
+  transition: all 0.5s;
+  font-weight: 500;
+}
+
+
+.container-inputs{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  display: flex;
+  transition: all 0.5s;
+
+}
+.one{
+  width: 20%;
+}
+
+.two{
+  width: 80%;
+}
+
+
+.container-code-validation{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+  padding: 0px;
+  flex-direction: column;
+}

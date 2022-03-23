@@ -1,0 +1,208 @@
+<div class="conatiner-app1 bg-fondo" id="conatiner-app1">
+
+<div class="" *ngIf="dataUsers.length > 0">
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>nombre</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>email</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef>telefono</th>
+      <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="identificacion">
+      <th mat-header-cell *matHeaderCellDef>identificacion</th>
+      <td mat-cell *matCellDef="let element">{{ element.identificacion }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="rol">
+      <th mat-header-cell *matHeaderCellDef>Rol</th>
+      <td mat-cell *matCellDef="let element">{{ element.rol }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions" >
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element" class="container-button">
+        <!-- Edit-->
+
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          (click)="editActive(element)"
+          *ngIf="usuarioLogged === 'Administrador'"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+          ></path>
+        </svg>
+        <!-- delete -->
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          (click)="openDialog(element)"
+          *ngIf="usuarioLogged === 'Administrador'"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+          ></path>
+        </svg>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+
+</div>
+
+
+</div>
+
+<span *ngIf="alert" class="bg-verde block shadow-2xl p-2 rounded-md">Cambios Guardados</span>
+<br />
+<div *ngIf="edit || create" class="bg-blanco shadow-2xl rounded p-5">
+<h1 *ngIf="edit && !create">Editar Usuario</h1>
+<h1 *ngIf="!edit && create">Crear Usuario</h1>
+
+<label class="block">
+  <span
+    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700"
+  >
+    Nombre
+  </span>
+  <input
+    type="text"
+    [(ngModel)]="user.name"
+    class="mt-1 px-3 py-2 bg-white border shadow-sm border-fondo placeholder-slate-400 focus:outline-none focus:border-card focus:ring-card block w-full rounded-md sm:text-sm focus:ring-1"
+    placeholder="correo@ejemplo.com"
+  />
+</label>
+
+<br />
+<label class="block">
+  <span
+    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700"
+  >
+    Email
+  </span>
+  <input
+    [(ngModel)]="user.email"
+    type="email"
+    class="mt-1 px-3 py-2 bg-white border shadow-sm border-fondo placeholder-slate-400 focus:outline-none focus:border-card focus:ring-card block w-full rounded-md sm:text-sm focus:ring-1"
+  />
+</label>
+<label class="block" *ngIf="create && !edit">
+  <span
+    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700"
+  >
+    Contraseña
+  </span>
+  <input
+    [(ngModel)]="contrasena"
+    type="email"
+    class="mt-1 px-3 py-2 bg-white border shadow-sm border-fondo placeholder-slate-400 focus:outline-none focus:border-card focus:ring-card block w-full rounded-md sm:text-sm focus:ring-1"
+  />
+</label>
+<label class="block">
+  <span
+    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700"
+  >
+    Telefono
+  </span>
+  <input
+    [(ngModel)]="user.phone"
+    type="text"
+    class="mt-1 px-3 py-2 bg-white border shadow-sm border-fondo placeholder-slate-400 focus:outline-none focus:border-card focus:ring-card block w-full rounded-md sm:text-sm focus:ring-1"
+  />
+</label>
+<label class="block">
+  <span
+    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700"
+  >
+    Identificacion
+  </span>
+  <input
+    [(ngModel)]="user.identificacion"
+    type="text"
+    class="mt-1 px-3 py-2 bg-white border shadow-sm border-fondo placeholder-slate-400 focus:outline-none focus:border-card focus:ring-card block w-full rounded-md sm:text-sm focus:ring-1"
+  />
+</label>
+<label class="block">
+  <span
+    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700"
+  >
+    Rol
+  </span>
+  <input
+    [(ngModel)]="user.rol"
+    type="text"
+    class="mt-1 px-3 py-2 bg-white border shadow-sm border-fondo placeholder-slate-400 focus:outline-none focus:border-card focus:ring-card block w-full rounded-md sm:text-sm focus:ring-1"
+  />
+</label>
+
+<br />
+<button
+  type="button"
+  class="bg-card hover:bg-amarilloR rounded-md p-2 card-button button-container"
+  (click)="sendEdit()"
+  *ngIf="edit && !create"
+>
+  <svg
+    class="w-6 h-6"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M5 13l4 4L19 7"
+    ></path>
+  </svg>
+  Editar Usuario
+</button>
+<button
+  type="button"
+  class="bg-card hover:bg-amarilloR rounded-md p-2 card-button button-container"
+  (click)="sendCreate()"
+  *ngIf="create && !edit"
+>
+  <svg
+    class="w-6 h-6"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M5 13l4 4L19 7"
+    ></path>
+  </svg>
+  Crear Usuario
+</button>
+</div>

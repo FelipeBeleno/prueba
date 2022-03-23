@@ -103,6 +103,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "prueba:build:production",
+            "firebaseProject": "gluky-981dd",
+            "firebaseHostingSite": "gluky-981dd"
+          }
         }
       }
     }

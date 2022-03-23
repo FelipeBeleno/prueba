@@ -1,0 +1,36 @@
+.conatiner-app1 {
+  width: 80vw;
+  height: auto;
+  padding: 5%;
+  overflow: auto;
+}
+
+.search-results {
+  height: auto;
+}
+
+.lista {
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  overflow: auto;
+
+}
+
+.container-button {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+  height: 50px;
+}
+
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

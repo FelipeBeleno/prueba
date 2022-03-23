@@ -1,0 +1,177 @@
+<div class="container-login bg-fondo">
+  <div class="container bg-blanco container-card flex mx-4 h-auto rounded-md">
+    <label class="block">
+      <span
+        class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700"
+      >
+        Email
+      </span>
+      <input
+        [(ngModel)]="email"
+        (keyup)="changeStatus()"
+        type="email"
+        name="email"
+        class="mt-1 px-3 py-2 bg-white border shadow-sm border-fondo placeholder-slate-400 focus:outline-none focus:border-card focus:ring-card block w-full rounded-md sm:text-sm focus:ring-1"
+        placeholder="correo@ejemplo.com"
+      />
+    </label>
+
+    <br />
+    <label class="block">
+      <span
+        class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700"
+      >
+        Contraseña
+      </span>
+      <input
+        [(ngModel)]="contrasena"
+        (keyup)="changeStatus()"
+        type="password"
+        name="password"
+        class="mt-1 px-3 py-2 bg-white border shadow-sm border-fondo placeholder-slate-400 focus:outline-none focus:border-card focus:ring-card block w-full rounded-md sm:text-sm focus:ring-1"
+        placeholder="***********"
+      />
+    </label>
+    <br />
+    <span class="bg-alerta p-1 rounded-md" *ngIf="errorForm.status">{{
+      errorForm.message
+    }}</span>
+    <br />
+
+    <button
+      (click)="submit()"
+      type="button"
+      class="bg-fondo hover:bg-hover hover:text-blanco rounded-md p-2 card-button"
+    >
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+        ></path>
+      </svg>
+      Acceder
+    </button>
+
+    <br />
+
+    <button
+      type="button"
+      class="bg-card hover:bg-amarilloR rounded-md p-2 card-button"
+      (click)="activateLoginPhone()"
+    >
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+        ></path>
+      </svg>
+      Acceder con tu numero de telefono
+    </button>
+    <br />
+
+    <div id="container-recaptcha"></div>
+
+    <div class="container-inputs" *ngIf="enterPhone">
+      <input
+        type="text"
+        class="one mt-1 px-3 py-2 bg-white border shadow-sm border-fondo placeholder-slate-400 focus:outline-none focus:border-card focus:ring-card block w-full rounded-md sm:text-sm focus:ring-1"
+        disabled
+        value="+57"
+      />
+      <input
+        type="number"
+        class="two mt-1 px-3 py-2 bg-white border shadow-sm border-fondo placeholder-slate-400 focus:outline-none focus:border-card focus:ring-card block w-full rounded-md sm:text-sm focus:ring-1"
+        [(ngModel)]="numberPhone"
+      />
+    </div>
+
+    <br />
+
+    <button
+      *ngIf="enterPhone"
+      type="button"
+      class="bg-fondo hover:bg-hover hover:text-blanco rounded-md p-2 card-button"
+      (click)="getOTP()"
+    >
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+        ></path>
+      </svg>
+      Enviar codigo
+    </button>
+
+    <br />
+    <span
+      class="bg-alerta p-1 rounded-md"
+      *ngIf="errorForm.status && enterPhone"
+      >{{ errorForm.message }}</span
+    >
+
+    <!-- validacion del codigo
+
+
+    -->
+
+    <div class="container-code-validation" *ngIf="enterPhone && validateCode">
+      <ng-otp-input
+        (onInputChange)="onOtpChange($event)"
+        [config]="{
+          length: 6,
+          inputStyles: {
+            borderColor: '#88d9d0'
+          }
+        }"
+      ></ng-otp-input>
+
+      <br />
+    </div>
+    <button
+      type="button"
+      class="bg-card hover:bg-amarilloR rounded-md p-2 card-button"
+      (click)="confirmOTP()"
+      *ngIf="enterPhone && validateCode"
+    >
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+        ></path>
+      </svg>
+      Valida tu codigo
+    </button>
+  </div>
+</div>

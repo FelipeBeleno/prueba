@@ -1,0 +1,19 @@
+<div>
+  <h1>Deseas eliminar al usuario {{ userDelete.name }} ?</h1>
+  <div class="container-button-modal">
+    <button
+      class="bg-fondo hover:bg-verde rounded-md p-2 card-button button-container"
+      (click)="handleDelete()"
+      [mat-dialog-close]="closeModal"
+    >
+      Sí
+    </button>
+    <br>
+    <button
+      class="bg-card hover:bg-amarilloR rounded-md p-2 card-button button-container"
+      mat-dialog-close
+    >
+      Cancelar
+    </button>
+  </div>
+</div>

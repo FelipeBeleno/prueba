@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "gluky-981dd": {
+      "hosting": {
+        "prueba": [
+          "gluky-981dd"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "gluky-981dd"
+  }
+}
